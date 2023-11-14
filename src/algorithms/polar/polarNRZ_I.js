@@ -5,30 +5,31 @@ const FpolarNRZ_I = (data) => {
   console.log("hehehe")
   for(let i = 0; i < data.length; i++){
       result[i]={
-          uv: 0,
-          pv: 0,
+        lineColor: "red",
+          x: i,
+          y: 0,
       }
   }
     var prevData;
 
     for (let i = 0; i < data.length; i++) {
       if (i == 0) {
-        prevData = 5;
-        result[i].uv = prevData;
+        prevData = 1;
+        result[i].y = prevData;
         continue;
       }
       if (data[i] == 0) {
-        result[i].uv = prevData;
+        result[i].y = prevData;
         continue;
       }
       if (data[i] == 1) {
-        if (prevData == 5) {
-          result[i].uv = -5;
-          prevData = -5;
+        if (prevData == 1) {
+          result[i].y = -1;
+          prevData = -1;
           continue;
         } else {
-          result[i].uv = 5;
-          prevData = 5;
+          result[i].y = 1;
+          prevData = 1;
           continue;
         }
       }

@@ -10,14 +10,13 @@ import FbipolarPseudoternary from "./algorithms/bipolar/bipolarPseudoternary";
 import NRZ from "./algorithms/unipolar/NRZ";
 import poo from "./algorithms/polar/polarNRZ_I";
 import F2b1q from "./algorithms/multilevel/2b1q";
+import React from 'react';
+
 
 function App() {
-  const [showChart, setShowChart] = useState(false);
   const [resData, setResData] = useState([]);
-  const [hasSecondSignal, setHasSecondSignal] = useState(null);
   const [disabledButton, setDisabledButton] = useState(true);
   const [category, setCategory] = useState();
-  const [activeClass, setActiveClass] = useState("");
   const [activeClassForChart, setActiveClassForChart] = useState("");
 
   const changeInput = () => {
@@ -27,23 +26,12 @@ function App() {
     }));
   };
 
-  const polarNRZ_I = () => {};
 
-  const handleClickPolarRZ = () => {
-    const res = polarRZ(changeInput());
-    setResData([...res]);
-    setHasSecondSignal(true);
-  };
-
-  const polarNRZ_L = () => {};
-
-  const polarManchester = () => {};
 
   const handleClickNRZ = () => {
     const res = NRZ(changeInput());
     setActiveClassForChart("nrz");
     setResData([...res]);
-    setHasSecondSignal(false);
   };
 
   const handleChange = (e) => {
@@ -51,7 +39,7 @@ function App() {
       .replace(/[^0-1]/g, "")
       .replace(/(.{4})/g, "$1 ")
       .trim();
-    if (e.target.value.length > 0) {
+    if (e.target.value.length > 3) {
       setDisabledButton(false);
     } else {
       setDisabledButton(true);
@@ -63,12 +51,10 @@ function App() {
     if (str === "bipolarAMI") {
       let res = FbipolarAMI(changeInput());
       setResData([...res]);
-      setHasSecondSignal(false);
     }
     if (str == "bipolarPseudoter") {
       let res = FbipolarPseudoternary(changeInput());
       setResData([...res]);
-      setHasSecondSignal(false);
     }
   };
 
@@ -77,17 +63,14 @@ function App() {
     if (str === "polarNRZ_I") {
       let res = FpolarNRZ_I(changeInput());
       setResData([...res]);
-      setHasSecondSignal(false);
     }
     if (str == "polarNRZ_L") {
       let res = FpolarNRZ_L(changeInput());
       setResData([...res]);
-      setHasSecondSignal(false);
     }
     if (str == "polarManchester") {
       let res = FpolarManchester(changeInput());
       setResData([...res]);
-      setHasSecondSignal(true);
     }
   };
 
@@ -96,9 +79,9 @@ function App() {
     if (str == "2B/1Q") {
       let res = F2b1q(changeInput());
       setResData([...res]);
-      setHasSecondSignal(false);
     }
   }
+  
 
   return (
     <div className="App">
@@ -121,7 +104,7 @@ function App() {
       />
 
       <div className="categoryButtons buttons">
-        {["Unipolar", "Polar", "Bipolar", "Multilevel", "Multitransition"].map(
+        {["Unipolar", "Polar", "Bipolar", "Multilevel"].map(
           (item) => (
             <button
               onClick={() => setCategory(item.toLowerCase())}
@@ -214,7 +197,7 @@ function App() {
 
       </div>
       <div className="chart-container">
-        <Chart resData={resData} hasSecondSignal={hasSecondSignal} />
+        <Chart resData={resData} />
       </div>
     </div>
   );
@@ -223,3 +206,9 @@ function App() {
 export default App;
 
 //         <button disabled={disabledButton} onClick={handleClickPolarRZ}>polarRZ </button>
+
+
+/*
+
+
+*/

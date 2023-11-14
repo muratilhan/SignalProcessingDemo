@@ -3,17 +3,18 @@ const NRZ = (data) => {
   
     for(let i = 0; i < data.length; i++){
         result[i]={
-            uv: 0,
-            pv: 0,
+          lineColor: "red",
+            x: i,
+            y: 0,
         }
     }
       var prevData;
   
       for (let i = 0; i < data.length; i++) {
         if(data[i] == 1){
-          result[i].uv = 2
+          result[i].y = 2
         }else{
-          result[i].uv = 0.02
+          result[i].y = 0
         }
       }
       

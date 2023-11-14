@@ -3,8 +3,9 @@ const F2b1q = (data) => {
   
     for(let i = 0; i < data.length; i++){
         result[i]={
-            uv: 0,
-            pv: 0,
+            lineColor: "red",
+            x: i,
+            y: 0,
         }
     }
       var prevData = true;
@@ -13,47 +14,56 @@ const F2b1q = (data) => {
         if(i%2 != 0) continue
         if(data[i] == 0 && data[i+1] == 0){
             if(prevData){
-                result[i].uv = 1
+                result[i].y = 1
+                result[i+1].y = 1
                 prevData = true
             }else{
-                result[i].uv = -1
+                result[i].y = -1
+                result[i+1].y = -1
                 prevData = false
             }
         }
 
         if(data[i] == 0 && data[i+1] == 1){
             if(prevData){
-                result[i].uv = 3
+                result[i].y = 3
+                result[i+1].y = 3
+
                 prevData = true
             }else{
-                result[i].uv = -3
+                result[i].y = -3
+                result[i+1].y = -3
                 prevData = false
             }
         }
 
         if(data[i] == 1 && data[i+1] == 0){
             if(prevData){
-                result[i].uv = -1
+                result[i].y = -1
+                result[i+1].y = -1
                 prevData = false
             }else{
-                result[i].uv = 1
+                result[i].y = 1
+                result[i+1].y = 1
+
                 prevData = true
             }
         }
 
         if(data[i] == 1 && data[i+1] == 1){
             if(prevData){
-                result[i].uv = -3
+                result[i].y = -3
+                result[i+1].y = -3
                 prevData = false
             }else{
-                result[i].uv = 3
+                result[i].y = 3
+                result[i+1].y = 3
                 prevData = true
             }
         }
 
       }
-      const res = result.filter(item => item.uv !== 0)
-      return res
+      return result
     };
   
     export default F2b1q

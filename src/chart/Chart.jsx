@@ -1,53 +1,30 @@
-import React, { PureComponent } from 'react';
-import {
-  BarChart,
-  Bar,
-  Cell,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ReferenceLine,
-  ResponsiveContainer,
-} from 'recharts';
+import React from 'react'
+import CanvasJSReact from '@canvasjs/react-charts';
+
+const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 
-const Chart = ({resData, hasSecondSignal}) => {
+const Chart = ({resData}) => {
 
-    console.log(resData)
+  const options = {
+    theme: "light2",
+    animationEnabled: true,
+    exportEnabled: true,
+    title: {
+        text: "Stock Movement"
+    },
+    axisY: {
+        title: "Stock In Hand"
+    },
+    data: [{
+        type: "stepLine",
+        markerSize: 5,
+        dataPoints: resData
+    }]
+};
   return (
-    <ResponsiveContainer width="100%" height="100%">
-        <BarChart
-          width={100}
-          height={100}
-          data={resData}
-          margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Bar
-        dataKey="uv"
-        fill="#ff0000"  // Bu çizginin içini boş yapar
-        stroke="#8884d8"  // Çizgi rengi
-        strokeWidth={2}  // Çizgi kalınlığı
-      />
-      {hasSecondSignal && (
-        <Bar
-          dataKey="pv"
-          fill="#ff0000"  // Bu çizginin içini boş yapar
-          stroke="#82ca9d"  // Çizgi rengi
-        />) }
-        </BarChart>
-      </ResponsiveContainer>
+    <CanvasJSChart options={options} />
+
   )
 }
 
