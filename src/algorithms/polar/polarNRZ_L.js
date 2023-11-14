@@ -1,4 +1,4 @@
-const polarNRZ_L = (data) => {
+const FpolarNRZ_L = (data) => {
     var result = [{}]
   
     for(let i = 0; i < data.length; i++){
@@ -20,4 +20,4 @@ const polarNRZ_L = (data) => {
       return result
     };
   
-    export default polarNRZ_L
+    export default FpolarNRZ_L

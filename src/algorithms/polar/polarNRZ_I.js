@@ -1,6 +1,8 @@
-const polarNRZ_I = (data) => {
+const FpolarNRZ_I = (data) => {
   var result = [{}]
 
+
+  console.log("hehehe")
   for(let i = 0; i < data.length; i++){
       result[i]={
           uv: 0,
@@ -35,4 +37,4 @@ const polarNRZ_I = (data) => {
     return result
   };
 
-  export default polarNRZ_I
+  export default FpolarNRZ_I

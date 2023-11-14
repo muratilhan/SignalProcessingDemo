@@ -1,6 +1,6 @@
 
 
-const bipolarAMI = (data) => {
+const FbipolarPseudoternary = (data) => {
     var result = [{}]
 
     for(let i = 0; i < data.length; i++){
@@ -12,7 +12,7 @@ const bipolarAMI = (data) => {
     var count=0;
 
     for (let i = 0; i < data.length; i++) {
-      if(data[i] == 0){
+      if(data[i] == 1){
         result[i].uv = 0.08
       }else{
         if(count == 0){
@@ -28,4 +28,4 @@ const bipolarAMI = (data) => {
     return result
   };
 
-  export default bipolarAMI
+  export default FbipolarPseudoternary
