@@ -102,7 +102,7 @@ function App() {
         maxlength="14"
       />
 
-      <div className="categoryButtons buttons">
+      <div className="buttons">
         {["Unipolar", "Polar", "Bipolar", "Multilevel"].map(
           (item) => (
             <button

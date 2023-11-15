@@ -31,7 +31,9 @@ const Chart = ({resData}) => {
     }]
 };
   return (
-    <CanvasJSChart className="chart" options={options} />
+    <div  className="chart">
+      <CanvasJSChart  className="chart" options={options} />
+    </div>
 
   )
 }
