@@ -8,9 +8,9 @@ import FbipolarAMI from "./algorithms/bipolar/bipolarAMI";
 import FbipolarPseudoternary from "./algorithms/bipolar/bipolarPseudoternary";
 import NRZ from "./algorithms/unipolar/NRZ";
 import F2b1q from "./algorithms/multilevel/2b1q";
-import React from 'react';
+import React from "react";
 import { db } from "./info";
-
+import Fmlt3 from "./algorithms/multitransition/mlt3";
 
 function App() {
   const [resData, setResData] = useState([]);
@@ -24,8 +24,6 @@ function App() {
       return Number(n);
     }));
   };
-
-
 
   const handleClickNRZ = () => {
     const res = NRZ(changeInput());
@@ -79,17 +77,41 @@ function App() {
       let res = F2b1q(changeInput());
       setResData([...res]);
     }
-  }
-  
+  };
+  const multitransition = (str) => {
+    setActiveClassForChart(str.toLocaleLowerCase());
+    if (str == "MLT3") {
+      let res = Fmlt3(changeInput());
+      setResData([...res]);
+    }
+  };
 
   return (
     <div className="App">
       <div className="introduction">
         <h2>Sayısal Sinyallerin Sayısala Çevrilmesi</h2>
-        <p> <span>Problem: </span> Sinyal kodlamada, uzun süre boyunca sürekli 1 veya 0 içeren sinyallerin alıcı tarafında doğru bir şekilde çözülmesi zor olabilir. Bu tür durumlar, alıcıda sinyalin doğru okunmasını engelleyebilir ve iletimde hata olasılığını artırabilir.</p>
-        <p>Bir sayısal sinyal belirli bir süre boyunca sabit kalırsa 'sürekli 1 veya 0 göndermek gibi..' sinyalde bir DC bileşeni oluşabilir ve düşük frekanslı bileşenlerin iletimi ve doğru algılanması zorlaşabilir. </p>
-        <p><span>Çözüm:</span> Sayısal kodlama teknikleri iletim hattının fiziksel özelliklerine uyum sağlayarak daha uzun mesafelerde veri iletimini optimize edebilir</p>
-        <p> İletim sırasında oluşabilecek hataları algılayabilir veya düzeltebilir.</p>
+        <p>
+          {" "}
+          <span>Problem: </span> Sinyal kodlamada, uzun süre boyunca sürekli 1
+          veya 0 içeren sinyallerin alıcı tarafında doğru bir şekilde çözülmesi
+          zor olabilir. Bu tür durumlar, alıcıda sinyalin doğru okunmasını
+          engelleyebilir ve iletimde hata olasılığını artırabilir.
+        </p>
+        <p>
+          Bir sayısal sinyal belirli bir süre boyunca sabit kalırsa 'sürekli 1
+          veya 0 göndermek gibi..' sinyalde bir DC bileşeni oluşabilir ve düşük
+          frekanslı bileşenlerin iletimi ve doğru algılanması zorlaşabilir.{" "}
+        </p>
+        <p>
+          <span>Çözüm:</span> Sayısal kodlama teknikleri iletim hattının
+          fiziksel özelliklerine uyum sağlayarak daha uzun mesafelerde veri
+          iletimini optimize edebilir
+        </p>
+        <p>
+          {" "}
+          İletim sırasında oluşabilecek hataları algılayabilir veya
+          düzeltebilir.
+        </p>
       </div>
       <h2>Lütfen 0 ve 1 lerden oluşan değer giriniz.</h2>
       <input
@@ -103,7 +125,7 @@ function App() {
       />
 
       <div className="buttons">
-        {["Unipolar", "Polar", "Bipolar", "Multilevel"].map(
+        {["Unipolar", "Polar", "Bipolar", "Multilevel", "Multitransition"].map(
           (item) => (
             <button
               onClick={() => setCategory(item.toLowerCase())}
@@ -172,34 +194,61 @@ function App() {
           </>
         )}
 
-        {category == 'multilevel' && (
+        {category == "multilevel" && (
           <>
-          {['2B/1Q'].map(item=>{
-            return (
-              <button
-              disabled={disabledButton}
-              className={
-                item.toLocaleLowerCase() == activeClassForChart
-                  ? "category"
-                  : "category active"
-              }
-              onClick={() => multilevel(item)}
-            >
-              {item}
-            </button>
-            )
-          })}
+            {["2B/1Q"].map((item) => {
+              return (
+                <button
+                  disabled={disabledButton}
+                  className={
+                    item.toLocaleLowerCase() == activeClassForChart
+                      ? "category"
+                      : "category active"
+                  }
+                  onClick={() => multilevel(item)}
+                >
+                  {item}
+                </button>
+              );
+            })}
           </>
         )}
 
-
-
+        {category == "multitransition" && (
+          <>
+            {["MLT3"].map((item) => {
+              return (
+                <button
+                  disabled={disabledButton}
+                  className={
+                    item.toLocaleLowerCase() == activeClassForChart
+                      ? "category"
+                      : "category active"
+                  }
+                  onClick={() => multitransition(item)}
+                >
+                  {item}
+                </button>
+              );
+            })}
+          </>
+        )}
       </div>
       <div className="chart-container">
         <Chart className="chart" resData={resData} />
         <div className="info">
           <h1>Algoritma Adımları:</h1>
-          {db.map(item=> item.name == activeClassForChart && <p> {item.infos.map(item=> <li>{item}</li> )} </p>)}
+          {db.map(
+            (item) =>
+              item.name == activeClassForChart && (
+                <p>
+                  {" "}
+                  {item.infos.map((item) => (
+                    <li>{item}</li>
+                  ))}{" "}
+                </p>
+              )
+          )}
         </div>
       </div>
     </div>
@@ -209,7 +258,6 @@ function App() {
 export default App;
 
 //         <button disabled={disabledButton} onClick={handleClickPolarRZ}>polarRZ </button>
-
 
 /*
 

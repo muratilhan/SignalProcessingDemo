@@ -26,6 +26,10 @@ export const db = [
   {
     name: "2b/1q",
     infos: ["00 önceki seviye pozitifse +1 negatifse -1", "01 önceki seviye pozitifse +3 negatifse -3","10 önceki seviye pozitifse -1 negatifse +1","11 önceki seviye pozitifse -3 negatifse +3 gerilimi temsil eder.", ],
+  },
+  {
+    name: "mlt3",
+    infos: ["Sonraki bit 0 ise dönüşüm yok", "Sonraki bit 0 ve şuanki seviye 0 değilse sonraki seviye = 0","Sonraki bit 1 ve şuanki seviye 0'sa sonraki seviye en son 0 olmayan seviyenin tersidir "],
   }
 
 ];
