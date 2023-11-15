@@ -2,15 +2,14 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import Chart from "./chart/Chart";
 import FpolarNRZ_I from "./algorithms/polar/polarNRZ_I";
-import polarRZ from "./algorithms/polarRZ";
 import FpolarNRZ_L from "./algorithms/polar/polarNRZ_L";
 import FpolarManchester from "./algorithms/polar/polarManchester";
 import FbipolarAMI from "./algorithms/bipolar/bipolarAMI";
 import FbipolarPseudoternary from "./algorithms/bipolar/bipolarPseudoternary";
 import NRZ from "./algorithms/unipolar/NRZ";
-import poo from "./algorithms/polar/polarNRZ_I";
 import F2b1q from "./algorithms/multilevel/2b1q";
 import React from 'react';
+import { db } from "./info";
 
 
 function App() {
@@ -85,7 +84,7 @@ function App() {
 
   return (
     <div className="App">
-      <div className="info">
+      <div className="introduction">
         <h2>Sayısal Sinyallerin Sayısala Çevrilmesi</h2>
         <p> <span>Problem: </span> Sinyal kodlamada, uzun süre boyunca sürekli 1 veya 0 içeren sinyallerin alıcı tarafında doğru bir şekilde çözülmesi zor olabilir. Bu tür durumlar, alıcıda sinyalin doğru okunmasını engelleyebilir ve iletimde hata olasılığını artırabilir.</p>
         <p>Bir sayısal sinyal belirli bir süre boyunca sabit kalırsa 'sürekli 1 veya 0 göndermek gibi..' sinyalde bir DC bileşeni oluşabilir ve düşük frekanslı bileşenlerin iletimi ve doğru algılanması zorlaşabilir. </p>
@@ -197,7 +196,11 @@ function App() {
 
       </div>
       <div className="chart-container">
-        <Chart resData={resData} />
+        <Chart className="chart" resData={resData} />
+        <div className="info">
+          <h1>Algoritma Adımları:</h1>
+          {db.map(item=> item.name == activeClassForChart && <p> {item.infos.map(item=> <li>{item}</li> )} </p>)}
+        </div>
       </div>
     </div>
   );

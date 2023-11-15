@@ -1,6 +1,6 @@
 import React from 'react'
 import CanvasJSReact from '@canvasjs/react-charts';
-
+import '../App.css'
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 
@@ -11,10 +11,18 @@ const Chart = ({resData}) => {
     animationEnabled: true,
     exportEnabled: true,
     title: {
-        text: "Stock Movement"
+        text: "Signal Process"
     },
     axisY: {
-        title: "Stock In Hand"
+      stripLines: [
+        {
+          value: 0, // Y ekseninde göstermek istediğimiz değer
+          showOnTop: true,
+          lineDashType: "solid", // Çizgi tipi
+          lineThickness: 2, // Çizgi kalınlığı
+          color: "black" // Çizgi rengi
+        }
+      ]
     },
     data: [{
         type: "stepLine",
@@ -23,7 +31,7 @@ const Chart = ({resData}) => {
     }]
 };
   return (
-    <CanvasJSChart options={options} />
+    <CanvasJSChart className="chart" options={options} />
 
   )
 }

@@ -12,7 +12,7 @@ const NRZ = (data) => {
   
       for (let i = 0; i < data.length; i++) {
         if(data[i] == 1){
-          result[i].y = 2
+          result[i].y = 1
         }else{
           result[i].y = 0
         }
