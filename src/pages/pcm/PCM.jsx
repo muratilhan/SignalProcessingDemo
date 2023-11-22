@@ -20,9 +20,7 @@ const PCM = () => {
         }
   }
 
-  useEffect(()=>{
-    console.log(numbers)
-},[numbers])
+
 
 
   return (
@@ -31,7 +29,7 @@ const PCM = () => {
     <h2> Delta Module </h2>
     <h3>Genlik değerleri giriniz.</h3>
     <div className='input-container'>
-        <input onChange={(e)=>handleChange(e)} type="number" />
+        <input onChange={(e)=>handleChange(e)} type="number" value={inputValue} />
         <button onClick={handleClick} className='input-button'>Ekle</button>
     </div>
         <button className='toggle-chart'>Show Charts</button>

@@ -26,7 +26,7 @@ const PCMchart = ({numbers}) => {
     }
   },[numbers])
 
-  console.log(data)
+  console.log(numbers)
 
   return (
     <ResponsiveContainer width="50%" height={400}>
